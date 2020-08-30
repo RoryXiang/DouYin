@@ -41,6 +41,7 @@ class GroupSpider(RedisCrawlSpider):
         group_id = item['group_id']
         try:
             datas = json.loads(response.text)
+            print(datas)
             group_name = datas['data']['share_data'][2]['description'].replace('\n', '')
             re_data = re.search(r'在抖音创建了群聊“(.*)”，?', group_name).group(1)
 
