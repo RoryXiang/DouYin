@@ -7,18 +7,9 @@ from copy import deepcopy
 import pymysql
 import scrapy
 from scrapy_redis.spiders import RedisCrawlSpider
-from DouYin.DouyinFun import *
+import requests
 
-connection = pymysql.connect(
-    host='localhost',
-    port=3306,
-    user='root',
-    password='pythonman',
-    db='DouYin',
-    charset='utf8'
-)
-
-cursor = connection.cursor()
+upload_url = 'http://49.232.202.165:8000/groupr/'
 
 
 class GroupSpider(RedisCrawlSpider):
@@ -50,24 +41,16 @@ class GroupSpider(RedisCrawlSpider):
         group_id = item['group_id']
         try:
             datas = json.loads(response.text)
-            qr_text = datas['data']['share_data'][2]['token']
             group_name = datas['data']['share_data'][2]['description'].replace('\n', '')
             re_data = re.search(r'在抖音创建了群聊“(.*)”，?', group_name).group(1)
 
             if len(re_data) > 0:
                 print('不是空群')
-                sql = """INSERT INTO DuoShanRandomGroup(re_data) VALUES ('%s')""" % group_id
-                cursor = connection.cursor()
 
-                try:
-                    # 执行sql语句
-                    cursor.execute(sql)
-                    # 提交到数据库执行
-                    connection.commit()
-                except Exception as f:
-                    print(f)
-                    # Rollback in case there is any error
-                    connection.rollback()
+                data = {
+                    'req_data': group_id
+                }
+                req = requests.post(upload_url, data=data)
 
             elif len(re_data) == 0:
                 print('是空群')
