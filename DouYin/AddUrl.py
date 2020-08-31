@@ -199,7 +199,7 @@ class AddRedisUrl(object):
     def add_redis(self):
         data = self.db.lrange('group:start_urls', 0, -1)
         if len(data) > 0:
-           pass
+           print('还有数据')
 
         elif len(data) <= 0:
             request_url = 'http://49.232.202.165:8000/distribution/?distribution_server_name={}'.format('服务器1')
@@ -233,7 +233,7 @@ def run():
     obj.add_redis()
 
 
-schedule.every(20).minutes.do(run)
+schedule.every(1).minutes.do(run)
 
 while True:
     schedule.run_pending()
