@@ -2,7 +2,6 @@ import json
 import time
 import requests
 import redis
-from DouYin.DouyinFun import *
 import schedule
 
 
