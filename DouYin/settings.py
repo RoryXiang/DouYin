@@ -106,4 +106,6 @@ REDIS_URL = 'redis://127.0.0.1:6379/2'
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-LOG_LEVEL= 'WARNING'
+LOG_LEVEL= 'INFO'
+
+FEED_EXPORT_ENCODING = 'utf-8'

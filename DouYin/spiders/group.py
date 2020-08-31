@@ -37,6 +37,7 @@ class GroupSpider(RedisCrawlSpider):
         }, callback=self.parse, dont_filter=True, meta={'item': deepcopy(item)})
 
     def parse(self, response):
+        print(response.text)
         item = response.meta['item']
         group_id = item['group_id']
         try:
