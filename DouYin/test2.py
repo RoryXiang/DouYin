@@ -1,6 +1,8 @@
-for i in range(500000, 600000):
-    group_id = int(str(67589828) + '00000000000') + i
-    if i == 500001:
-        print(group_id)
-    else:
-        print(1)
+b = 0
+for i in range(2900000, 3300000):
+    b +=1
+
+print(b)
+
+
+

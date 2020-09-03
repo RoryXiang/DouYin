@@ -1,9 +1,7 @@
-import requests
+import re
 
-url = 'http://127.0.0.1:8000/groupr/'
+data = '【长按并复制这条口令，即可加入群聊】邀请你加入群聊“”😋🍫🍢🍏🍊😏🍨😍🍍🍈🍥🍍'
 
-data = {
-    'req_data':111122
-}
-req = requests.post(url, data=data)
+redat  = re.search(r'邀请你加入群聊“(.*)”?', data).group(1)
 
+print(redat)

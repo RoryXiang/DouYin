@@ -197,14 +197,13 @@ class AddRedisUrl(object):
     def add_redis(self):
         data = self.db.lrange('group:start_urls', 0, -1)
         if len(data) > 0:
-           print('还有数据')
+           print('还有数据：{}'.format(int(time.time())))
 
         elif len(data) <= 0:
             request_url = 'http://49.232.202.165:8000/distribution/?distribution_server_name={}'.format('服务器1')
+            #request_url = 'http://127.0.0.1:8000/distribution/?distribution_server_name={}'.format('服务器1')
             data = requests.get(request_url)
             json_data = json.loads(data.text)
-            print(json_data)
-
             if json_data['status'] == 0:
                 distribution_last = json_data['data']['distribution_last']
                 distribution_new = json_data['data']['distribution_new']
